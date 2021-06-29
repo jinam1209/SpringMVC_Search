@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="CommentMapper">
+	 <sql id="bcc">
+	 	from tbl_comment where cno=#{cno}
+	 </sql>
+	 <sql id="bcp">
+	 	from tbl_comment where pno=#{pno}
+	 </sql>
+ 	<insert id="reg" parameterType="cvo">
+ 		insert into tbl_comment(cno, pno, writer, content)
+ 		values (seq_comment_cno.nextval, #{pno}, #{writer}, trim(#{content}))
+ 	</insert>
+ 	<select id="list" parameterType="int" resultType="cvo">
+ 		select * <include refid="bcp"/>
+ 	</select>
+ 	<select id="tc" parameterType="int" resultType="int">
+ 		select count(cno) <include refid="bcp"/>
+ 	</select>
+ 	<update id="mod" parameterType="cvo">
+ 		update tbl_comment set content=trim(#{content}), regdate=sysdate
+ 		where cno=#{cno}
+ 	</update>
+ 	<delete id="del" parameterType="int">
+ 		delete <include refid="bcc"/>
+ 	</delete>
+ 	<delete id="dellAll" parameterType="int">
+ 		delete <include refid="bcp"/>
+ 	</delete>
+ </mapper>
