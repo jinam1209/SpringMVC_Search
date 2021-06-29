@@ -205,7 +205,7 @@
 			$(".cmt_regdate").css("margin-right", "30px");
 		}
 	}
-	function list_comment(pno, r="", kw="") {// getJSON = GET 방식으로 json data를 받아오는 ajax
+	function list_comment(pno, r="", kw="") { // getJSON = GET 방식으로 json data를 받아오는 ajax
 		let url_val = (r==""||kw=="") ? "/comment/pno/" + pno + ".json"
 				: "/comment/pno/" + pno + "/" + r + "/" + kw + ".json";
 		$.getJSON(url_val, function(result) { // server에서 주는 result 받아옴
