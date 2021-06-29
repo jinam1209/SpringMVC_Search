@@ -4,7 +4,19 @@
 <jsp:include page="../common/header.jsp" />
 <jsp:include page="../common/nav.jsp" />
 
-<h2>Member List</h2>
+<h2 class="float-left">Member List</h2>
+<div class="form-group float-left ml-3">
+	<form action="/member/list" class="form-inline">
+		<select class="form-control" name="range">
+			<option value="en">Email+Nickname</option>
+			<option value="e">Email</option>
+			<option value="n">Nickname</option>
+			<option value="r">Regdate</option>
+		</select>
+		<input class="form-control" type="text" placeholder="검색어 입력" name="keyword">
+		<button type="submit" class="btn btn-success">검색</button>
+	</form>
+</div>
 <c:choose>
 	<c:when test="${ses.email eq 'admin@admin.com' }">
 	<table class="table table-hover">

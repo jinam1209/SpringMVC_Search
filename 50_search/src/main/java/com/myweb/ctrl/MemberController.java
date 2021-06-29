@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.myweb.domain.MemberVO;
+import com.myweb.domain.PageVO;
 import com.myweb.service.member.MemberServiceRule;
 
 @RequestMapping("/member/*")
@@ -54,8 +55,8 @@ public class MemberController {
 	}
 	
 	@GetMapping("/list")
-	public void list(Model model) {
-		model.addAttribute("m_list", msv.getList());
+	public void list(Model model, PageVO pgvo) {
+		model.addAttribute("m_list", msv.getList(pgvo));
 	}
 	
 	@PostMapping("/login")

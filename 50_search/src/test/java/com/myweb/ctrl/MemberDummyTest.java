@@ -22,6 +22,17 @@ public class MemberDummyTest {
 	@Inject
 	private MemberDAORule mdao;
 	
+	@Test
+	public void insertMemberTest() throws Exception {
+		for (int i = 0; i < 128; i++) {
+			MemberVO mvo = new MemberVO();
+			mvo.setEmail("user" + i + "@user.com");
+			mvo.setPwd("1111");
+			mvo.setNickname("USER" + i);
+			mdao.insert(mvo);
+		}
+	}
+	
 //	@Test
 //	public void insertMemberTest() throws Exception {
 //		MemberVO mvo = new MemberVO();
@@ -53,17 +64,17 @@ public class MemberDummyTest {
 //		}
 //	}
 	
-	@Test
-	public void loginMemberTest() throws Exception {
-		MemberVO mvo = new MemberVO();
-		mvo.setEmail("tester0@tester.com");
-		mvo.setPwd("1111");
-		MemberVO loginInfo = mdao.selectOne(mvo);
-		logger.info(loginInfo.getEmail());
-		logger.info(loginInfo.getNickname());
-		logger.info(loginInfo.getPwd());
-		logger.info(loginInfo.getRegdate());
-	}
+//	@Test
+//	public void loginMemberTest() throws Exception {
+//		MemberVO mvo = new MemberVO();
+//		mvo.setEmail("tester0@tester.com");
+//		mvo.setPwd("1111");
+//		MemberVO loginInfo = mdao.selectOne(mvo);
+//		logger.info(loginInfo.getEmail());
+//		logger.info(loginInfo.getNickname());
+//		logger.info(loginInfo.getPwd());
+//		logger.info(loginInfo.getRegdate());
+//	}
 	
 //	@Test
 //	public void deleteMemberTest() throws Exception {

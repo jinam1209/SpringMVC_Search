@@ -23,10 +23,10 @@ public class ProductDummyTest {
 	@Inject
 	private ProductDAO pdao;
 	
-	@Test
-	public void removeProductTest() {
-		pdao.delete(11);
-	}
+//	@Test
+//	public void removeProductTest() {
+//		pdao.delete(11);
+//	}
 	
 //	@Test
 //	public void modifyProductTest() {
@@ -54,16 +54,17 @@ public class ProductDummyTest {
 //		}
 //	}
 	
-//	@Test
-//	public void insertProductTest() {
-//		for (int i = 0; i < 128; i++) {
-//			ProductVO pvo = new ProductVO();
-//			pvo.setTitle("상품 입력 테스트 제목" + i);
-//			pvo.setContent("상품 입력 테스트 내용" + i);
-//			pvo.setWriter("admin@admin.com");
-//			pvo.setPrice((int)(Math.random()*1000)
-//					+ Double.parseDouble(String.format("%.2f", Math.random())));
-//			pdao.insert(pvo);
-//		}
-//	}
+	@Test
+	public void insertProductTest() {
+		for (int i = 0; i < 128; i++) {
+			ProductVO pvo = new ProductVO();
+			pvo.setTitle("상품 입력 테스트 제목" + i);
+			pvo.setContent("상품 입력 테스트 내용" + i);
+			int r = (int)(Math.random()*128); // 0 ~ 127
+			pvo.setWriter("user" + r + "@user.com");
+			pvo.setPrice((int)(Math.random()*1000)
+					+ Double.parseDouble(String.format("%.2f", Math.random())));
+			pdao.insert(pvo);
+		}
+	}
 }

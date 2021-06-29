@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.myweb.domain.CommentVO;
+import com.myweb.domain.PageVO;
 import com.myweb.persistence.comment.CommentDAORule;
 
 @Service
@@ -24,8 +25,8 @@ public class CommentService implements CommentServiceRule {
 	}
 
 	@Override
-	public List<CommentVO> getList(int pno) {
-		return cdao.selectList(pno);
+	public List<CommentVO> getList(int pno, PageVO pgvo) {
+		return cdao.selectList(pno, pgvo);
 	}
 
 	@Override

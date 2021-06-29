@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.myweb.domain.PageVO;
 import com.myweb.domain.ProductVO;
 import com.myweb.orm.FileProcessor;
 import com.myweb.service.product.ProductServiceRule;
@@ -60,8 +61,8 @@ public class ProductController {
 	}
 	
 	@GetMapping("/list")
-	public void list(Model model) {
-		model.addAttribute("list", psv.getList());
+	public void list(Model model, PageVO pgvo) {
+		model.addAttribute("list", psv.getList(pgvo));
 	}
 	@PostMapping("/register")
 	public String register(ProductVO pvo, RedirectAttributes reAttr,

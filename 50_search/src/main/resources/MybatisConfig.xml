@@ -6,5 +6,6 @@
 		<typeAlias type="com.myweb.domain.ProductVO" alias="pvo"/>
 		<typeAlias type="com.myweb.domain.CommentVO" alias="cvo"/>
 		<typeAlias type="com.myweb.domain.FilesVO" alias="fvo"/>
+		<typeAlias type="com.myweb.domain.PageVO" alias="pgvo"/>
 	</typeAliases>
 </configuration>

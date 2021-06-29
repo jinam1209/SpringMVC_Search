@@ -92,7 +92,20 @@
   </table>
 
 <!-- Ajax Comment Part -->
-<h2>Comment List</h2>
+<h2 class="float-left">Comment List</h2>
+<div class="form-group float-right ml-3">
+    <form action="" class="form-inline">
+        <select class="form-control" id="range">
+            <option value="cwr">전체</option>
+            <option value="c">내용</option>
+            <option value="w">작성자</option>
+            <option value="r">작성날짜</option>
+            <option value="cw">내용+작성자</option>
+        </select>
+        <input class="form-control" type="text" placeholder="검색어 입력" id="keyword">
+        <button type="button" class="btn btn-success" id="searchBtn">검색</button>
+    </form>
+</div>
 <c:if test="${ses.email ne '' && ses.email ne null }">
 	<form>
 	  <div class="input-group mb-3">
@@ -107,7 +120,7 @@
 	  </div>
 	</form>
 </c:if>
-<div id="accordion">
+<div id="accordion" style="clear: both;">
 
 </div>
 <!-- 추가된 부분 The Modal -->
@@ -192,8 +205,10 @@
 			$(".cmt_regdate").css("margin-right", "30px");
 		}
 	}
-	function list_comment(pno) { // getJSON = GET 방식으로 json data를 받아오는 ajax
-		$.getJSON("/comment/pno/" + pno + ".json", function(result) { // server에서 주는 result 받아옴
+	function list_comment(pno, r="", kw="") {// getJSON = GET 방식으로 json data를 받아오는 ajax
+		let url_val = (r==""||kw=="") ? "/comment/pno/" + pno + ".json"
+				: "/comment/pno/" + pno + "/" + r + "/" + kw + ".json";
+		$.getJSON(url_val, function(result) { // server에서 주는 result 받아옴
 			console.log(result);
 			print_list(result); // 여기서 풀지 않기 위해
 		}).fail(function(err) {
@@ -232,6 +247,12 @@
 	}
 </script>
 <script>
+	$(document).on("click", "#searchBtn", function() {
+		let range_val = $("#range option:selected").val();
+		let kw_val = $("#keyword").val();
+		let pno_val = $("#pnoVal").text();
+		list_comment(pno_val, range_val, kw_val)
+	});
 	$(document).on("click", "#cmtSubmit", write_comment); // 실행이 아닌 이름을 부르는 것 () 필요 없음 => call back
 	$(document).on("click", ".fa-remove", function() { // cno 가져오기~
 		let cno_val = $(this).data("cno"); // data-cno 부름

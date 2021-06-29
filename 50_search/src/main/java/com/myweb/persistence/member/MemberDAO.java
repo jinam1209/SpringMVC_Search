@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.myweb.domain.MemberVO;
+import com.myweb.domain.PageVO;
 
 @Repository
 public class MemberDAO implements MemberDAORule { // commit 알아서 해줌
@@ -30,8 +31,8 @@ public class MemberDAO implements MemberDAORule { // commit 알아서 해줌
 	}
 
 	@Override
-	public List<MemberVO> selectList() {
-		return sql.selectList(NS + "list");
+	public List<MemberVO> selectList(PageVO pgvo) {
+		return sql.selectList(NS + "list", pgvo);
 	}
 
 	@Override

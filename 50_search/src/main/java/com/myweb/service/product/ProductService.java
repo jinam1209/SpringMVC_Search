@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.myweb.domain.FilesVO;
+import com.myweb.domain.PageVO;
 import com.myweb.domain.ProductVO;
 import com.myweb.persistence.files.FilesDAORule;
 import com.myweb.persistence.product.ProductDAORule;
@@ -28,8 +29,8 @@ public class ProductService implements ProductServiceRule {
 	}
 
 	@Override
-	public List<ProductVO> getList() {
-		return pdao.selectList();
+	public List<ProductVO> getList(PageVO pgvo) {
+		return pdao.selectList(pgvo);
 	}
 
 	@Override

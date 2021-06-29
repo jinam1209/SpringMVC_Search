@@ -6,6 +6,27 @@
  	<sql id="bc">
  		from tbl_member where email=#{email}
  	</sql>
+ 	<sql id="search">
+	 	<if test="range != null">
+	 		<trim prefix="where" suffix="">
+	 			<choose>
+	 				<when test="range == 'en'.toString()">
+	 					email like '%'||#{keyword}||'%' or 
+ 		     		    nickname like '%'||#{keyword}||'%'
+	 				</when>
+	 				<when test="range == 'e'.toString()">
+	 					email like '%'||#{keyword}||'%'
+	 				</when>
+	 				<when test="range == 'n'.toString()">
+	 					nickname like '%'||#{keyword}||'%'
+	 				</when>
+	 				<when test="range == 'r'.toString()">
+	 					to_char(regdate,'yyyy-MM-dd') like '%'||#{keyword}||'%'
+	 				</when>
+	 			</choose>
+	 		</trim>
+	 	</if>
+	 </sql>
  	<insert id="reg" parameterType="mvo">
  		insert into tbl_member(email, pwd, nickname)
  		values (#{email}, #{pwd}, #{nickname})
@@ -13,8 +34,9 @@
  	<select id="check" parameterType="String" resultType="int">
  		select count(email) as cnt <include refid="bc"/>
  	</select>
- 	<select id="list" resultType="mvo">
+ 	<select id="list" parameterType="pgvo" resultType="mvo">
  		select * from tbl_member
+ 		<include refid="search"/>
  	</select>
  	<select id="login" parameterType="mvo" resultType="mvo">
  		select * <include refid="bc"/> and pwd=#{pwd}

@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import com.myweb.domain.PageVO;
 import com.myweb.domain.ProductVO;
 
 @Repository
@@ -25,8 +26,8 @@ public class ProductDAO implements ProductDAORule {
 	}
 
 	@Override
-	public List<ProductVO> selectList() {
-		return sql.selectList(NS + "list");
+	public List<ProductVO> selectList(PageVO pgvo) {
+		return sql.selectList(NS + "list", pgvo);
 	}
 
 	@Override
